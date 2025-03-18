@@ -21,41 +21,41 @@ describe('SPL Token Minter', () => {
 
   console.log("mintKeypair.publicKey", payer.publicKey.toBase58());
 
-  // it('Create an SPL Token!', async () => {
-  //   const transactionSignature = await program.methods
-  //     .createToken(metadata.name, metadata.symbol, metadata.uri)
-  //     .accounts({
-  //       payer: payer.publicKey,
-  //       mintAccount: mintKeypair.publicKey,
-  //     })
-  //     .signers([mintKeypair])
-  //     .rpc();
+  it('Create an SPL Token!', async () => {
+    const transactionSignature = await program.methods
+      .createToken(metadata.name, metadata.symbol, metadata.uri)
+      .accounts({
+        payer: payer.publicKey,
+        mintAccount: mintKeypair.publicKey,
+      })
+      .signers([mintKeypair])
+      .rpc();
 
-  //   console.log('Success!');
-  //   console.log(`   Mint Address: ${mintKeypair.publicKey}`);
-  //   console.log(`   Transaction Signature: ${transactionSignature}`);
-  // });
+    console.log('Success!');
+    console.log(`   Mint Address: ${mintKeypair.publicKey}`);
+    console.log(`   Transaction Signature: ${transactionSignature}`);
+  });
 
-  // it('Mint some tokens to your wallet!', async () => {
-  //   // Derive the associated token address account for the mint and payer.
-  //   const associatedTokenAccountAddress = getAssociatedTokenAddressSync(mintKeypair.publicKey, payer.publicKey);
+  it('Mint some tokens to your wallet!', async () => {
+    // Derive the associated token address account for the mint and payer.
+    const associatedTokenAccountAddress = getAssociatedTokenAddressSync(mintKeypair.publicKey, payer.publicKey);
 
-  //   // Amount of tokens to mint.
-  //   const amount = new anchor.BN(100);
+    // Amount of tokens to mint.
+    const amount = new anchor.BN(100);
 
-  //   // Mint the tokens to the associated token account.
-  //   const transactionSignature = await program.methods
-  //     .mintToken(amount)
-  //     .accounts({
-  //       mintAuthority: payer.publicKey,
-  //       recipient: payer.publicKey,
-  //       mintAccount: mintKeypair.publicKey,
-  //       associatedTokenAccount: associatedTokenAccountAddress,
-  //     })
-  //     .rpc();
+    // Mint the tokens to the associated token account.
+    const transactionSignature = await program.methods
+      .mintToken(amount)
+      .accounts({
+        mintAuthority: payer.publicKey,
+        recipient: payer.publicKey,
+        mintAccount: mintKeypair.publicKey,
+        associatedTokenAccount: associatedTokenAccountAddress,
+      })
+      .rpc();
 
-  //   console.log('Success!');
-  //   console.log(`   Associated Token Account Address: ${associatedTokenAccountAddress}`);
-  //   console.log(`   Transaction Signature: ${transactionSignature}`);
-  // });
+    console.log('Success!');
+    console.log(`   Associated Token Account Address: ${associatedTokenAccountAddress}`);
+    console.log(`   Transaction Signature: ${transactionSignature}`);
+  });
 });
